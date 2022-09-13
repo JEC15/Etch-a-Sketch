@@ -78,18 +78,15 @@ let isDrawing = false;
 let drawMode = '';
 let initialGrid = 16;
 const grid = document.querySelector('.grid');
-const buttons = document.querySelectorAll('button');
+const modeButtons = document.querySelectorAll('#mode');
+const newGridButton = document.querySelector('.new-grid');
+const clearButton = document.querySelector('.clear')
 
 generateGrid(grid, initialGrid);
 
-buttons.forEach(button => button.addEventListener('click', (e) => {
+modeButtons.forEach(button => button.addEventListener('click', (e) => {
   drawMode = e.currentTarget.className;
-  switch (drawMode) {
-    case 'clear':
-      clearGrid();
-      break;
-    case 'new-grid':
-      generateUserDefinedGrid();
-      break;
-  };
 }));
+
+newGridButton.addEventListener('click', generateUserDefinedGrid);
+clearButton.addEventListener('click', clearGrid);
