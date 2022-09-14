@@ -57,6 +57,15 @@ function drawRandom(cell) {
   cell.style.backgroundColor = `rgb(${R}, ${G}, ${B})`;
 };
 
+function drawShade(cell) {
+  const baseRGBValue = parseInt(DEFAULT_BACKGROUND_COLOR.replace(/ /g, '').slice(4, -1).split(',')[0]);
+  const decreasePercentage = 10;
+  const currentRGBValue = parseInt(cell.style.backgroundColor.replace(/ /g, '').slice(4, -1).split(',')[0]);
+  const currentPercentage = Math.round((currentRGBValue/baseRGBValue) * 100);
+  const newRGBValue = (baseRGBValue * (currentPercentage - decreasePercentage) / 100);
+  cell.style.backgroundColor = `rgb(${newRGBValue}, ${newRGBValue}, ${newRGBValue})`;
+};
+
 function clearGrid() {
   const cells = Array.from(grid.children);
   cells.forEach(cell => cell.style.backgroundColor = DEFAULT_BACKGROUND_COLOR);
@@ -69,6 +78,9 @@ function draw(cell) {
       break;
     case 'random':
       drawRandom(cell);
+      break;
+    case 'shade':
+      drawShade(cell);
       break;
   };
 };
