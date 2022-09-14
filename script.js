@@ -84,8 +84,11 @@ const clearButton = document.querySelector('.clear')
 
 generateGrid(grid, initialGrid);
 
-modeButtons.forEach(button => button.addEventListener('click', (e) => {
-  drawMode = e.currentTarget.className;
+modeButtons.forEach((button, i, buttons) => button.addEventListener('click', (e) => {
+  drawMode = e.currentTarget.classList[0];
+  buttons.forEach((button => {
+    button.classList.toggle('active', button === e.currentTarget);
+  }));
 }));
 
 newGridButton.addEventListener('click', generateUserDefinedGrid);
